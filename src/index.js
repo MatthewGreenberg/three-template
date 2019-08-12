@@ -13,14 +13,15 @@ animate()
 function init() {
   //Camera
   camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000)
-  camera.position.z = 400
+  camera.position.z = 3
   scene = new THREE.Scene()
 
-  var geometry = new THREE.BoxBufferGeometry(200, 200, 200)
-  var material = new THREE.MeshBasicMaterial()
+  var geometry = new THREE.BoxBufferGeometry(1, 1, 1)
+  var material = new THREE.MeshStandardMaterial({ color: 'rgb(250,0,0)' })
   mesh = new THREE.Mesh(geometry, material)
 
   scene.add(mesh)
+  addLights()
 
   renderer = new THREE.WebGLRenderer({ antialias: true })
   controls = new OrbitControls(camera, renderer.domElement)
@@ -32,6 +33,25 @@ function init() {
   //
   window.addEventListener('resize', onWindowResize, false)
 }
+
+function addLights() {
+  var hemiLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.6)
+  hemiLight.position.set(0, 3, 0)
+  scene.add(hemiLight)
+  var pointLight = new THREE.PointLight(0xff00ff, 5, 0)
+  pointLight.position.set(3, 0, 0)
+  scene.add(pointLight)
+  var pointLight2 = new THREE.PointLight(0x0000ff, 5, 0)
+  pointLight2.position.set(-3, 0, 0)
+  scene.add(pointLight2)
+  var sphereSize = 1
+  var pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize)
+  var pointLightHelper2 = new THREE.PointLightHelper(pointLight2, sphereSize)
+
+  scene.add(pointLightHelper)
+  scene.add(pointLightHelper2)
+}
+
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
