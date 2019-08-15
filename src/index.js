@@ -12,16 +12,17 @@ init()
 animate()
 function init() {
   //Camera
-  camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000)
+  camera = new THREE.PerspectiveCamera(
+    70,
+    window.innerWidth / window.innerHeight,
+    1,
+    1000
+  )
   camera.position.z = 3
   scene = new THREE.Scene()
 
-  var geometry = new THREE.BoxBufferGeometry(1, 1, 1)
-  var material = new THREE.MeshStandardMaterial({ color: 'rgb(250,0,0)' })
-  mesh = new THREE.Mesh(geometry, material)
-
-  scene.add(mesh)
   addLights()
+  addMesh()
 
   renderer = new THREE.WebGLRenderer({ antialias: true })
   controls = new OrbitControls(camera, renderer.domElement)
@@ -32,6 +33,14 @@ function init() {
   document.body.appendChild(renderer.domElement)
   //
   window.addEventListener('resize', onWindowResize, false)
+}
+
+function addMesh() {
+  var geometry = new THREE.BoxBufferGeometry(1, 1, 1)
+  var material = new THREE.MeshStandardMaterial({ color: 'rgb(250,0,0)' })
+  mesh = new THREE.Mesh(geometry, material)
+
+  scene.add(mesh)
 }
 
 function addLights() {
