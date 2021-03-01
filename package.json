@@ -21,7 +21,7 @@
     "canvas-sketch-util": "^1.8.0",
     "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
-    "three": "^0.107.0",
+    "three": "^0.125.0",
     "three-orbitcontrols": "^2.102.2"
   }
 }
